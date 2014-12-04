@@ -1,0 +1,20 @@
+<phpunit bootstrap="bootstrap.php"
+		colors="true"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		stopOnError="true"
+		stopOnFailure="false"
+		verbose="true">
+
+	<selenium>
+		<browser name="Internet Explorer" browser="*iexplore" />
+		<browser name="Firefox" browser="*firefox" />
+	</selenium>
+
+	<php>
+		<ini name="display_errors" value="1"/>
+		<ini name="display_startup_errors" value="1"/>
+	</php>
+
+</phpunit>
