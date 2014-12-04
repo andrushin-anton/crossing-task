@@ -8,4 +8,9 @@ class Boatman extends Person
 		{
 				parent::__construct($name, $age);
 		}
+
+		public function getType()
+		{
+				return self::BIG;
+		}
 }

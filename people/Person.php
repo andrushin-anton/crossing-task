@@ -55,11 +55,5 @@ abstract class Person
 		/**
 		 * @return mixed
 		 */
-		public function getType()
-		{
-				if($this->age > 18)
-						return self::BIG;
-				else
-						return self::SMALL;
-		}
+		abstract public function getType();
 }

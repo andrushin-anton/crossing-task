@@ -25,10 +25,13 @@ class Boat
 
 		/**
 		 * @param Person $person
+		 * @throws \Exception
 		 */
 		public function addPersonToBoat(Person $person)
 		{
 				$accept = $this->acceptPerson();
+				if(!$accept)
+						throw new \Exception('Boat is busy');
 
 				if(is_array($accept))
 				{
@@ -87,5 +90,18 @@ class Boat
 				$this->persons = [];
 				echo "Boat crossed: $whom".PHP_EOL;
 				echo '-----------------------------------------'.PHP_EOL;
+		}
+
+		/**
+		 * @return int
+		 */
+		public function countPersonsInBoat()
+		{
+				return count($this->persons);
+		}
+
+		public function cleanBoat()
+		{
+				$this->persons = [];
 		}
 }

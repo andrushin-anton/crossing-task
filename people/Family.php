@@ -5,16 +5,21 @@ namespace people;
 class Family
 {
 		private $members = [];
-		private $solution = [];
 		private $membersOnStartSide = [];
 		private $membersOnFinishSide = [];
 		private $currentSide = 'membersOnStartSide';
 
+
 		/**
 		 * @return array
+		 * @throws
 		 */
 		public function howCrossTheRiver()
 		{
+				if($this->countChildren() < 2)
+						throw new \Exception('Family must have at least 2 children');
+
+				$solution = [];
 				$this->membersOnStartSide = $this->members;
 
 				$patterns = ['2small', Person::SMALL, Person::BIG, Person::SMALL];
@@ -23,6 +28,27 @@ class Family
 				{
 						foreach($patterns as $pattern)
 						{
+								//That is all, everyone was crossed the river
+								if(count($this->membersOnStartSide) == 0)
+										break;
+
+								//If there are only two persons on the start side and all of them are children
+								//than change the pattern
+								if(count($this->membersOnStartSide) == 2)
+								{
+										$changePattern = true;
+										foreach($this->membersOnStartSide as $mem)
+										{
+												if($mem->getType() != Person::SMALL){
+														$changePattern = false;
+														break;
+												}
+										}
+										if($changePattern)
+												$pattern = '2small';
+
+								}
+
 								switch($pattern)
 								{
 										case '2small':
@@ -36,14 +62,14 @@ class Family
 														if(count($mem) == 2)
 																break;
 												}
-												array_push($this->solution, $mem);
+												array_push($solution, $mem);
 												$this->changeSide();
 												break;
 										case Person::SMALL:
 												foreach($this->getCurrentSideMembers() as $member)
 												{
 														if($member->getType() == Person::SMALL) {
-																array_push($this->solution, $member);
+																array_push($solution, $member);
 																$this->changePersonSide($member);
 																$this->changeSide();
 																break;
@@ -54,7 +80,7 @@ class Family
 												foreach($this->getCurrentSideMembers() as $member)
 												{
 														if($member->getType() == Person::BIG) {
-																array_push($this->solution, $member);
+																array_push($solution, $member);
 																$this->changePersonSide($member);
 																$this->changeSide();
 																break;
@@ -64,7 +90,21 @@ class Family
 								}
 						}
 				}
-				return $this->solution;
+				return $solution;
+		}
+
+		/**
+		 * @return int
+		 */
+		private function countChildren()
+		{
+				$children = 0;
+				foreach($this->members as $member)
+				{
+						if($member->getType() == Person::SMALL)
+								$children++;
+				}
+				return $children;
 		}
 
 		/**

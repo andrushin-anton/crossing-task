@@ -14,11 +14,11 @@ class Application
 {
 		public function run()
 		{
-				$father = new Father('Father', 32);
-				$mother = new Mother('Mother', 29);
-				$son = new Son('Son', 14);
-				$daughter = new Daughter('Daughter', 12);
-				$boatman = new Boatman('Boatman', 54);
+				$father = new Father('Sergey', 32);
+				$mother = new Mother('Tatyana', 29);
+				$son = new Son('Oleg', 14);
+				$daughter = new Daughter('Masha', 12);
+				$boatman = new Boatman('Igor', 54);
 
 				$family = new Family();
 				$family->addMember($father);
@@ -29,8 +29,11 @@ class Application
 
 				$solution = $family->howCrossTheRiver();
 
+				$family->removeMember($boatman);
+
 				$boat = Boat::getInstance();
 
+				//Here we go!
 				foreach($solution as $whoCross)
 				{
 						if(is_array($whoCross))
