@@ -12,44 +12,44 @@ use people\Boatman;
 
 class Application
 {
-		public function run()
-		{
-				$father = new Father('Sergey', 32);
-				$mother = new Mother('Tatyana', 29);
-				$son = new Son('Oleg', 14);
-				$daughter = new Daughter('Masha', 12);
-				$boatman = new Boatman('Igor', 54);
+    public function run()
+    {
+        $father = new Father('Sergey', 32);
+        $mother = new Mother('Tatyana', 29);
+        $son = new Son('Oleg', 14);
+        $daughter = new Daughter('Masha', 12);
+        $boatman = new Boatman('Igor', 54);
 
-				$family = new Family();
-				$family->addMember($father);
-				$family->addMember($mother);
-				$family->addMember($son);
-				$family->addMember($daughter);
-				$family->addMember($boatman);
+        $family = new Family();
+        $family->addMember($father);
+        $family->addMember($mother);
+        $family->addMember($son);
+        $family->addMember($daughter);
+        $family->addMember($boatman);
 
-				$solution = $family->howCrossTheRiver();
+        $solution = $family->howCrossTheRiver();
 
-				$family->removeMember($boatman);
+        $family->removeMember($boatman);
 
-				$boat = Boat::getInstance();
+        $boat = Boat::getInstance();
 
-				//Here we go!
-				foreach($solution as $whoCross)
-				{
-						if(is_array($whoCross))
-						{
-								foreach($whoCross as $person)
-								{
-										$boat->addPersonToBoat($person);
-								}
-						}
-						else
-						{
-								$boat->addPersonToBoat($whoCross);
-						}
-						$boat->crossTheRiver();
-				}
-		}
+        //Here we go!
+        foreach($solution as $whoCross)
+        {
+            if(is_array($whoCross))
+            {
+                foreach($whoCross as $person)
+                {
+                    $boat->addPersonToBoat($person);
+                }
+            }
+            else
+            {
+                $boat->addPersonToBoat($whoCross);
+            }
+            $boat->crossTheRiver();
+        }
+    }
 }
 
 $app = new Application();

@@ -4,13 +4,13 @@ namespace people;
 
 class Son extends Person
 {
-		public function __construct($name, $age)
-		{
-				parent::__construct($name, $age);
-		}
+    public function __construct($name, $age)
+    {
+        parent::__construct($name, $age);
+    }
 
-		public function getType()
-		{
-				return self::SMALL;
-		}
+    public function getType()
+    {
+        return self::SMALL;
+    }
 }
